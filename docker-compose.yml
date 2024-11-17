@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  calibre_instance1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: calibre_instance1
+    ports:
+      - "9070:7070"  # Map port 7070 on the host to port 8080 in the container
+    volumes:
+      - ./calibre-web/instance1/books:/library
+      - ./calibre-web/instance1/config:/config
+    environment:
+      - CALIBRE_PORT=7070  # Optional environment variable for debugging
+
+  calibre_instance2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: calibre_instance2
+    ports:
+      - "9071:7070"  # Map port 7071 on the host to port 8080 in the container
+    volumes:
+      - ./calibre-web/instance2/books:/library
+      - ./calibre-web/instance2/config:/config
+    environment:
+      - CALIBRE_PORT=7071  # Optional environment variable for debugging
+
